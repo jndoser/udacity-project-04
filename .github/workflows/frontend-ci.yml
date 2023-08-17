@@ -24,7 +24,7 @@ jobs:
       - run: cd starter/frontend && npm ci
 
       # Run the tests.
-      - run: cd starter/frontwnd && npm test
+      - run: cd starter/frontend && npm test
 
       # Send a console message at completion.
       - run: |
