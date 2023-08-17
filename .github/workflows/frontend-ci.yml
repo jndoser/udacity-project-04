@@ -1,4 +1,4 @@
-name: frontend-ci-workflow
+name: Frontend Continuous Integration
 
 on:
   workflow_dispatch:
@@ -56,7 +56,7 @@ jobs:
   run-build:
     runs-on: ubuntu-latest
     
-    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    if: ${{ always() && needs.run-test.result == 'success' && needs.run-lint.result == 'success' }}
 
     needs: [run-test, run-lint]
 
