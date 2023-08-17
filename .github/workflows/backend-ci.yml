@@ -79,7 +79,7 @@ jobs:
       - run: pip install pipenv
 
       # Install dependencies
-      - run: cd starter/backend && pipenv installs
+      - run: cd starter/backend && pipenv installs && pipenv installs -d
 
       # Send a console message at completion.
       - run: |
