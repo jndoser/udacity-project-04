@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: backend
-          image: backend
+          image: nhl0docker1/mp-backend
           ports:
             - containerPort: 5000

@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: frontend
+          image: nhl0docker1/mp-frontend
           ports:
             - containerPort: 3000
