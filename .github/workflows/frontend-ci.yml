@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  build:
+  run-test:
 
     runs-on: ubuntu-latest
 
@@ -29,5 +29,55 @@ jobs:
       # Send a console message at completion.
       - run: |
           echo "Testing done."
+
+  run-lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the code from the repository.
+      - uses: actions/checkout@v3
+
+      # Set up a Node.js environment using the specified node version.
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      # Install the dependencies.
+      - run: cd starter/frontend && npm ci
+
+      # Run the linter.
+      - run: cd starter/frontend && npm run lint
+
+      # Send a console message at completion.
+      - run: |
+          echo "Linting done."
+
+  run-build:
+    runs-on: ubuntu-latest
+    
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+
+    needs: [run-test, run-lint]
+
+    steps:
+      # Check out the code from the repository.
+      - uses: actions/checkout@v3
+
+      # Set up a Node.js environment using the specified node version.
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      # Install the dependencies.
+      - run: cd starter/frontend && npm ci
+
+      # Run the build.
+      - run: cd starter/frontend && npm run build
+
+      # Send a console message at completion.
+      - run: |
+          echo "Build done."
+
 
         
